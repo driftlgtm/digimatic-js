@@ -10,6 +10,14 @@ TypeScript/browser library for communicating with **Mitutoyo Digimatic SPC** mea
 
 ## Quick start
 
+### Installation
+
+Generally speaking, to bundle this library in your project, you can use:
+
+```bash
+pnpm i jsr:@lgtm/digimatic-js
+```
+
 ### Single device
 
 ```ts
