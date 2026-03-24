@@ -21,7 +21,7 @@ pnpm i jsr:@lgtm/digimatic-js
 ### Single device
 
 ```ts
-import { DigimaticDevice } from 'digimatic-js'
+import { DigimaticDevice } from '@lgtm/digimatic-js'
 
 const device = new DigimaticDevice()
 
@@ -56,7 +56,7 @@ console.log(reading.value, reading.unit)
 ### Multiple devices with DigimaticManager
 
 ```ts
-import { DigimaticManager } from 'digimatic-js'
+import { DigimaticManager } from '@lgtm/digimatic-js'
 
 const manager = new DigimaticManager()
 
@@ -79,10 +79,48 @@ unsubscribe()
 await manager.disconnectAll()
 ```
 
+### Mitutoyo DMX-8/2 multiplexer
+
+The `DigimaticDmx8` class communicates with the **DMX-8/2**, a microcontrolled interface that connects up to 8 Digimatic instruments to a single RS-232C port.
+
+#### Continuous mode
+
+```ts
+import { DigimaticDmx8 } from '@lgtm/digimatic-js'
+
+const dmx = new DigimaticDmx8()
+
+dmx.on('reading', (r) => {
+  console.log(`CH${r.channel}: ${r.value} ${r.unit}`)
+})
+
+dmx.on('error', (err) => console.error(err.message))
+
+// Opens the native port selection dialog (requires a user gesture)
+await dmx.connect()
+
+// Start continuous transmission from all channels
+await dmx.startContinuous()
+
+// Stop when done
+await dmx.stopContinuous()
+await dmx.disconnect()
+```
+
+#### Poll a single channel
+
+```ts
+await dmx.connect()
+
+// Send "C1" and wait for the response
+const reading = await dmx.readChannel(1)
+console.log(reading.channel, reading.value, reading.unit)
+```
+
 ### Manual packet parsing (advanced)
 
 ```ts
-import { parsePacket, PacketAccumulator } from 'digimatic-js'
+import { parsePacket, PacketAccumulator } from '@lgtm/digimatic-js'
 
 // Direct parsing of a raw packet (13 bytes)
 const raw = new Uint8Array([0x00, 0x02, 0x05, 0x03, 0x04, 0x00, 0x00, 0x02, 0x00, ...])
@@ -144,6 +182,40 @@ new DigimaticDevice(options?: DigimaticDeviceOptions)
 | `reading` | `DigimaticReading` | New reading received |
 | `stateChange` | `DigimaticConnectionState` | Connection state changed |
 | `error` | `Error` | Communication error |
+
+### `DigimaticDmx8`
+
+#### Methods
+
+| Method | Description |
+|---|---|
+| `connect(port?)` | Connects (opens dialog if port is omitted) |
+| `disconnect()` | Disconnects and releases the port |
+| `startContinuous()` | Sends `GS` — device streams all channels continuously |
+| `stopContinuous()` | Sends `GR` — stops continuous transmission |
+| `readChannel(n)` | Sends `Cn` (1–8), returns a Promise → single reading |
+| `on(event, cb)` | Adds a listener |
+| `off(event, cb)` | Removes a listener |
+| `once(event, cb)` | One-time listener |
+
+#### Events
+
+| Event | Payload | Description |
+|---|---|---|
+| `reading` | `DigimaticDmx8Reading` | New reading received |
+| `stateChange` | `DigimaticConnectionState` | Connection state changed |
+| `error` | `Error` | Communication error |
+
+### `DigimaticDmx8Reading`
+
+```ts
+interface DigimaticDmx8Reading {
+  channel: number      // Channel index (1–8)
+  value: number        // Numeric value (e.g. 11.378)
+  unit: 'mm' | 'in'   // Unit of measure
+  timestamp: number    // Reception time as ms epoch
+}
+```
 
 ### `DigimaticReading`
 
