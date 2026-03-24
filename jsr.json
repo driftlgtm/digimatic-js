@@ -1,6 +1,6 @@
 {
 	"name": "@lgtm/digimatic-js",
 	"version": "0.1.0",
-	"license": "MIT",
-	"exports": "./src/index.ts"
+	"exports": "./src/index.ts",
+	"exclude": ["demo", "pnpm-lock.yaml"]
 }

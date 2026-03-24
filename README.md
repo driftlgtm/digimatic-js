@@ -6,12 +6,6 @@ TypeScript/browser library for communicating with **Mitutoyo Digimatic SPC** mea
 
 ---
 
-## Installation
-
-```bash
-npm install digimatic-js
-```
-
 ---
 
 ## Quick start
@@ -176,15 +170,20 @@ Once connected, the device appears as a serial port in the `navigator.serial.req
 
 ---
 
-## Build
+## Publishing
+
+This package is published on [JSR](https://jsr.io/@lgtm/digimatic-js).
 
 ```bash
-npm install
-npm run build   # output in dist/
-npm run dev     # watch mode
+pnpx jsr publish
 ```
 
-Uses [tsdown](https://tsdown.dev) with Rolldown as bundler. Output: ESM + CJS + `.d.ts`.
+## Local development
+
+```bash
+pnpm install
+pnpm run preview # serve demo at http://localhost:3000
+```
 
 ---
 

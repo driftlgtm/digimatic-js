@@ -1,4 +1,4 @@
-import { DigimaticManager } from "../dist/index.js";
+import { DigimaticManager } from "@lgtm/digimatic-js";
 
 const manager = new DigimaticManager();
 const simDevices = new Map(); // id → intervalId
