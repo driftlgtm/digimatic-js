@@ -1,7 +1,4 @@
 {
-	"name": "@lgtm/digimatic-js",
-	"version": "0.1.0",
-	"description": "Browser JS library for Mitutoyo Digimatic SPC protocol via Web Serial API",
 	"type": "module",
 	"scripts": {
 		"preview": "pnpx serve ./demo"
@@ -10,12 +7,5 @@
 		"@types/w3c-web-serial": "^1.0.8",
 		"typescript": "^6.0.2"
 	},
-	"keywords": [
-		"mitutoyo",
-		"digimatic",
-		"spc",
-		"web-serial",
-		"metrology"
-	],
 	"license": "MIT"
 }
