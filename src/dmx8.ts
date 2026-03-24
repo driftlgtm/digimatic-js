@@ -22,8 +22,20 @@ const RESPONSE_TIMEOUT_MS = 5000;
  *
  * Observed format: `1 MW +001.378 mm    `
  * i.e. `{channel} {mode} {signed_value} {unit}`
+ *
+ * Error format: `1 TO 999999.99 mm` indicates a measurement error
+ * from the connected Digimatic device.
  */
 function parseDmx8Line(line: string): DigimaticDmx8Reading | null {
+	// Check for device error response: `{channel} TO {value} {unit}`
+	const errorMatch = line.match(/^(\d+)\s+TO\s+\S+\s+(\S+)/);
+	if (errorMatch) {
+		throw new DigimaticError(
+			`Errore di misura dal canale ${errorMatch[1]} del DMX-8/2: risposta "TO" indica errore dello strumento.`,
+			"DEVICE_ERROR",
+		);
+	}
+
 	const m = line.match(/^(\d+)\s+\S+\s+([+-]\d+\.\d+)\s+(\S+)/);
 	if (!m) return null;
 
@@ -252,9 +264,13 @@ export class DigimaticDmx8 {
 
 	private handleLine(line: string): void {
 		if (!line) return;
-		const reading = parseDmx8Line(line);
-		if (reading) {
-			this.emitter.emit("reading", reading);
+		try {
+			const reading = parseDmx8Line(line);
+			if (reading) {
+				this.emitter.emit("reading", reading);
+			}
+		} catch (err) {
+			this.handleError(err);
 		}
 	}
 

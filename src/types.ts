@@ -105,6 +105,7 @@ export class DigimaticError extends Error {
 			| "PARSE_ERROR"
 			| "CONNECTION_LOST"
 			| "TIMEOUT"
+			| "DEVICE_ERROR"
 			| "UNKNOWN",
 	) {
 		super(message);
