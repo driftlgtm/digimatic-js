@@ -1,5 +1,7 @@
 import { DigimaticDmx8, DigimaticDmx8Reading } from "@lgtm/digimatic-js";
 
+declare const __LIB_VERSION__: string;
+
 interface CardReading {
 	value: number;
 	unit: string;
@@ -21,6 +23,8 @@ const btnDiscAll = document.getElementById(
 const btnSimulate = document.getElementById(
 	"btn-simulate",
 ) as HTMLButtonElement;
+
+document.getElementById("version-badge")!.textContent = `v${__LIB_VERSION__}`;
 
 // Support badge
 const badge = document.getElementById("support-badge")!;

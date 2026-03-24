@@ -8,6 +8,9 @@ importers:
 
   .:
     devDependencies:
+      '@types/node':
+        specifier: ^25.5.0
+        version: 25.5.0
       '@types/w3c-web-serial':
         specifier: ^1.0.8
         version: 1.0.8
@@ -16,7 +19,7 @@ importers:
         version: 6.0.2
       vite:
         specifier: ^8.0.2
-        version: 8.0.2
+        version: 8.0.2(@types/node@25.5.0)
 
 packages:
 
@@ -135,6 +138,9 @@ packages:
 
   '@tybys/wasm-util@0.10.1':
     resolution: {integrity: sha512-9tTaPJLSiejZKx+Bmog4uSubteqTvFrVrURwkmHixBo0G4seD0zUxp98E1DzUBJxLQ3NPwXrGKDiVjwx/DpPsg==}
+
+  '@types/node@25.5.0':
+    resolution: {integrity: sha512-jp2P3tQMSxWugkCUKLRPVUpGaL5MVFwF8RDuSRztfwgN1wmqJeMSbKlnEtQqU8UrhTmzEmZdu2I6v2dpp7XIxw==}
 
   '@types/w3c-web-serial@1.0.8':
     resolution: {integrity: sha512-QQOT+bxQJhRGXoZDZGLs3ksLud1dMNnMiSQtBA0w8KXvLpXX4oM4TZb6J0GgJ8UbCaHo5s9/4VQT8uXy9JER2A==}
@@ -268,6 +274,9 @@ packages:
     engines: {node: '>=14.17'}
     hasBin: true
 
+  undici-types@7.18.2:
+    resolution: {integrity: sha512-AsuCzffGHJybSaRrmr5eHr81mwJU3kjw6M+uprWvCXiNeN9SOGwQ3Jn8jb8m3Z6izVgknn1R0FTCEAP2QrLY/w==}
+
   vite@8.0.2:
     resolution: {integrity: sha512-1gFhNi+bHhRE/qKZOJXACm6tX4bA3Isy9KuKF15AgSRuRazNBOJfdDemPBU16/mpMxApDPrWvZ08DcLPEoRnuA==}
     engines: {node: ^20.19.0 || >=22.12.0}
@@ -392,6 +401,10 @@ snapshots:
       tslib: 2.8.1
     optional: true
 
+  '@types/node@25.5.0':
+    dependencies:
+      undici-types: 7.18.2
+
   '@types/w3c-web-serial@1.0.8': {}
 
   detect-libc@2.1.2: {}
@@ -497,7 +510,9 @@ snapshots:
 
   typescript@6.0.2: {}
 
-  vite@8.0.2:
+  undici-types@7.18.2: {}
+
+  vite@8.0.2(@types/node@25.5.0):
     dependencies:
       lightningcss: 1.32.0
       picomatch: 4.0.4
@@ -505,4 +520,5 @@ snapshots:
       rolldown: 1.0.0-rc.11
       tinyglobby: 0.2.15
     optionalDependencies:
+      '@types/node': 25.5.0
       fsevents: 2.3.3
