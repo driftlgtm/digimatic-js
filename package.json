@@ -1,5 +1,5 @@
 {
-	"name": "digimatic-js",
+	"name": "@lgtm/digimatic-js",
 	"version": "0.1.0",
 	"description": "Browser JS library for Mitutoyo Digimatic SPC protocol via Web Serial API",
 	"type": "module",
