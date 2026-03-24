@@ -248,6 +248,16 @@ The Digimatic SPC protocol uses a **proprietary 5-pin connector** (Mitutoyo Mini
 
 Once connected, the device appears as a serial port in the `navigator.serial.requestPort()` dialog.
 
+### DMX-8/2 multiplexer
+
+The **Mitutoyo DMX-8/2** connects up to 8 Digimatic instruments to a single RS-232C port (D-SUB 9). Use it when you need to read multiple gauges simultaneously from one serial connection.
+
+- Connect the DMX-8/2 to the PC via a **DB9 RS-232 → USB adapter**
+- Connect up to 8 Digimatic instruments to the DMX-8/2 inputs
+- The device appears as a single serial port — use `DigimaticDmx8` to communicate with it
+
+Serial parameters used by the DMX-8/2: 9600 baud, 8 data bits, 1 stop bit, no parity, no flow control.
+
 ---
 
 ## Publishing
