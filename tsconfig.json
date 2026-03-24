@@ -1,0 +1,17 @@
+{
+	"compilerOptions": {
+		"target": "ES2022",
+		"module": "ESNext",
+		"moduleResolution": "bundler",
+		"lib": ["ES2022", "DOM"],
+		"types": ["w3c-web-serial"],
+		"strict": true,
+		"declaration": true,
+		"declarationMap": true,
+		"isolatedDeclarations": true,
+		"outDir": "./dist",
+		"rootDir": "./src",
+		"skipLibCheck": true,
+	},
+	"include": ["src/**/*"],
+}
