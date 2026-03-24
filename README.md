@@ -11,7 +11,8 @@ TypeScript/browser library for communicating with **Mitutoyo Digimatic SPC** mea
 Generally speaking, to bundle this library in your project, you can use:
 
 ```bash
-pnpm i jsr:@lgtm/digimatic-js
+# Replace "pnpm" with your package manager or runtime of choice (npm, yarn, bun, deno, etc.)
+pnpm install jsr:@lgtm/digimatic-js
 ```
 
 ---
