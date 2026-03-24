@@ -273,7 +273,7 @@ pnpx jsr publish
 
 ```bash
 pnpm install
-pnpm dev # serve demo at http://localhost:3000
+pnpm dev # serve demo at http://localhost:5713
 ```
 
 ---
