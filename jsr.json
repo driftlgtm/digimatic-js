@@ -1,7 +1,7 @@
 {
 	"name": "@lgtm/digimatic-js",
-	"version": "0.2.2",
+	"version": "0.3.0",
 	"license": "MIT",
 	"exports": "./src/index.ts",
-	"exclude": ["demo", "pnpm-lock.yaml"]
+	"exclude": ["demo", "pnpm-lock.yaml", "vite.config.js"]
 }

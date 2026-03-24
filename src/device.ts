@@ -32,7 +32,7 @@ const DEFAULT_OPTIONS: Required<DigimaticDeviceOptions> = {
  * ```
  */
 export class DigimaticDevice {
-	private emitter = new TypedEmitter();
+	private emitter = new TypedEmitter<DigimaticDeviceEvents>();
 	private port: SerialPort | null = null;
 	private reader: ReadableStreamDefaultReader<Uint8Array> | null = null;
 	private accumulator = new PacketAccumulator();
@@ -163,6 +163,8 @@ export class DigimaticDevice {
 				const { value, done } = await this.reader.read();
 				if (done) break;
 				if (!value || value.length === 0) continue;
+
+				console.log("[digimatic-js] serial rx:", value);
 
 				const packets = this.accumulator.push(value);
 				for (const packet of packets) {

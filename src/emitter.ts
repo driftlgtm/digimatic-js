@@ -1,18 +1,16 @@
-import type { DigimaticDeviceEvents, DigimaticEventListener } from "./types.js";
-
-type EventKey = keyof DigimaticDeviceEvents;
+import type { DigimaticEventListener } from "./types.js";
 
 /**
  * Minimal typed event emitter with no external dependencies.
  */
-export class TypedEmitter {
+export class TypedEmitter<TEvents extends object> {
 	// eslint-disable-next-line @typescript-eslint/no-explicit-any
-	private listeners: Map<EventKey, Set<DigimaticEventListener<any>>> =
+	private listeners: Map<keyof TEvents, Set<DigimaticEventListener<any>>> =
 		new Map();
 
-	on<K extends EventKey>(
+	on<K extends keyof TEvents>(
 		event: K,
-		listener: DigimaticEventListener<DigimaticDeviceEvents[K]>,
+		listener: DigimaticEventListener<TEvents[K]>,
 	): this {
 		if (!this.listeners.has(event)) {
 			this.listeners.set(event, new Set());
@@ -21,35 +19,30 @@ export class TypedEmitter {
 		return this;
 	}
 
-	off<K extends EventKey>(
+	off<K extends keyof TEvents>(
 		event: K,
-		listener: DigimaticEventListener<DigimaticDeviceEvents[K]>,
+		listener: DigimaticEventListener<TEvents[K]>,
 	): this {
 		this.listeners.get(event)?.delete(listener);
 		return this;
 	}
 
-	once<K extends EventKey>(
+	once<K extends keyof TEvents>(
 		event: K,
-		listener: DigimaticEventListener<DigimaticDeviceEvents[K]>,
+		listener: DigimaticEventListener<TEvents[K]>,
 	): this {
-		const wrapper: DigimaticEventListener<DigimaticDeviceEvents[K]> = (
-			payload,
-		) => {
+		const wrapper: DigimaticEventListener<TEvents[K]> = (payload) => {
 			listener(payload);
 			this.off(event, wrapper);
 		};
 		return this.on(event, wrapper);
 	}
 
-	emit<K extends EventKey>(
-		event: K,
-		payload: DigimaticDeviceEvents[K],
-	): void {
+	emit<K extends keyof TEvents>(event: K, payload: TEvents[K]): void {
 		this.listeners.get(event)?.forEach((fn) => fn(payload));
 	}
 
-	removeAllListeners(event?: EventKey): void {
+	removeAllListeners(event?: keyof TEvents): void {
 		if (event) {
 			this.listeners.delete(event);
 		} else {

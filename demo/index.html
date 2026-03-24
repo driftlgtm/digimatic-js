@@ -325,6 +325,30 @@
 				color: var(--text);
 			}
 
+			/* ── Poll buttons ── */
+			.btn-poll {
+				padding: 0.5rem 0;
+				border-radius: 6px;
+				border: 1px solid var(--border);
+				background: var(--bg);
+				color: var(--text);
+				font-family: var(--mono);
+				font-size: 0.72rem;
+				font-weight: 700;
+				cursor: pointer;
+				transition:
+					border-color 0.15s,
+					color 0.15s;
+			}
+			.btn-poll:hover:not(:disabled) {
+				border-color: var(--accent);
+				color: var(--accent);
+			}
+			.btn-poll:disabled {
+				opacity: 0.3;
+				cursor: not-allowed;
+			}
+
 			/* ── Simulator (for browsers without real HW) ── */
 			#simulator {
 				margin-top: auto;
@@ -352,13 +376,50 @@
 				<div class="card">
 					<div class="card-title">Devices</div>
 					<button class="btn-primary" id="btn-connect">
-						＋ Connect device
+						Connect DMX-8/2
 					</button>
 					<button class="btn-danger" id="btn-disconnect-all" disabled>
 						Disconnect all
 					</button>
 					<div id="device-list">
 						<div class="empty-state">No devices connected</div>
+					</div>
+				</div>
+
+				<div class="card" id="poll">
+					<div class="card-title">Poll channel</div>
+					<div
+						id="poll-buttons"
+						style="
+							display: grid;
+							grid-template-columns: repeat(4, 1fr);
+							gap: 0.4rem;
+						"
+					>
+						<button class="btn-poll" data-channel="1" disabled>
+							CH1
+						</button>
+						<button class="btn-poll" data-channel="2" disabled>
+							CH2
+						</button>
+						<button class="btn-poll" data-channel="3" disabled>
+							CH3
+						</button>
+						<button class="btn-poll" data-channel="4" disabled>
+							CH4
+						</button>
+						<button class="btn-poll" data-channel="5" disabled>
+							CH5
+						</button>
+						<button class="btn-poll" data-channel="6" disabled>
+							CH6
+						</button>
+						<button class="btn-poll" data-channel="7" disabled>
+							CH7
+						</button>
+						<button class="btn-poll" data-channel="8" disabled>
+							CH8
+						</button>
 					</div>
 				</div>
 
@@ -410,13 +471,6 @@
 			</section>
 		</main>
 
-		<script type="importmap">
-			{
-				"imports": {
-					"@lgtm/digimatic-js": "https://esm.sh/jsr/@lgtm/digimatic-js"
-				}
-			}
-		</script>
 		<script type="module" src="demo.js"></script>
 	</body>
 </html>

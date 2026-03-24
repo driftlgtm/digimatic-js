@@ -63,6 +63,32 @@ export interface DigimaticDeviceEvents {
 }
 
 /**
+ * A single reading received from a DMX-8/2 channel.
+ */
+export interface DigimaticDmx8Reading {
+	/** Channel index (1–8) */
+	channel: number;
+	/** Numeric measurement value */
+	value: number;
+	/** Unit of measure ('mm' | 'in') */
+	unit: "mm" | "in";
+	/** Reception timestamp (ms epoch) */
+	timestamp: number;
+}
+
+/**
+ * Map of events emitted by DigimaticDmx8.
+ */
+export interface DigimaticDmx8Events {
+	/** New reading received from any channel */
+	reading: DigimaticDmx8Reading;
+	/** Connection state changed */
+	stateChange: DigimaticConnectionState;
+	/** Communication error */
+	error: Error;
+}
+
+/**
  * Generic type for an event listener.
  */
 export type DigimaticEventListener<T> = (payload: T) => void;

@@ -53,6 +53,7 @@
 
 export { DigimaticDevice } from "./device.js";
 export { DigimaticManager } from "./manager.js";
+export { DigimaticDmx8 } from "./dmx8.js";
 export { parsePacket, PacketAccumulator, PACKET_SIZE } from "./parser.js";
 export { DigimaticError } from "./types.js";
 export type {
@@ -61,5 +62,7 @@ export type {
 	DigimaticPortOptions,
 	DigimaticDeviceOptions,
 	DigimaticDeviceEvents,
+	DigimaticDmx8Reading,
+	DigimaticDmx8Events,
 	DigimaticEventListener,
 } from "./types.js";
