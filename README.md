@@ -233,7 +233,7 @@ interface DigimaticReading {
 
 ```ts
 class DigimaticError extends Error {
-  code: 'UNSUPPORTED' | 'PORT_BUSY' | 'PARSE_ERROR' | 'CONNECTION_LOST' | 'TIMEOUT' | 'UNKNOWN'
+  code: 'UNSUPPORTED' | 'PORT_BUSY' | 'PARSE_ERROR' | 'CONNECTION_LOST' | 'TIMEOUT' | 'DEVICE_ERROR' | 'UNKNOWN'
 }
 ```
 
